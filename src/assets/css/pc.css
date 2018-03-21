@@ -1,0 +1,65 @@
+
+body{
+	font-size: 12px!important;
+}
+.ant-menu{
+	font-size: 12px!important;
+}
+.logo{
+	display: flex;
+	align-items: center;
+	color: #2db7f5;
+}
+.logo img{
+	width: 48px;
+}
+.logo span{
+	padding: 0 0 0 5px;
+	font-size: 24px;
+}
+
+
+.copyright{
+	text-align: center;
+	font-size: 14px;
+	line-height: 30px;
+}
+
+.loginpanel{
+	position: absolute;
+	right: 0;
+	top: 0;
+	line-height: 46px;
+}
+
+.radiusInput{
+	border-radius: 6px!important;
+}
+
+.usercenter{
+	display: inline-block!important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

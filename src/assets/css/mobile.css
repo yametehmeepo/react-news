@@ -1,0 +1,39 @@
+
+
+.mobileheader a{
+	padding: 0 5px;
+	display: flex;
+	height: 50px;
+	align-items: center;
+	width: 170px;
+}
+
+.mobileheader img{
+	width: 48px;
+	margin-right: 5px;
+}
+.mobileheader span{
+	font-size: 20px;
+	color: #2db7f5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
