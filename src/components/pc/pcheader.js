@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Menu, Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
-
-//import logo from '../../assets/img/logo2.png'
+import axios from 'axios';
+import Storage,{ storage_name } from '../../assets/js/storage.js';
 
 const MenuItem = Menu.Item;
 const FormItem = Form.Item;
@@ -24,8 +24,13 @@ class FormRegister extends Component {
 	    this.props.form.validateFieldsAndScroll((err, values) => {
 	      if (!err) {
 	        console.log('Received values of form: ', values);
-	        message.success('注册成功!')
-	        this.props.form.resetFields();
+	        axios.get('http://newsapi.gugujiankong.com/Handler.ashx?action='+this.props.action+'&username=userName&password=password&r_userName='+values.r_username+'&r_password='+values.r_password+'&r_confirmPassword='+values.r_confirmpassword).then(res => {
+	        	message.success('注册成功!')
+	        	this.props.form.resetFields();
+	        }).catch(res => {
+
+	        });
+	        
 	      }
 	    });
 	}
@@ -51,7 +56,7 @@ class FormRegister extends Component {
 	render(){
 		let {getFieldDecorator} = this.props.form;
 		return (
-			<Form layout='vertical' id="form2" ref={(form2) => {this.form_2 = form2}} onSubmit={this.registeSubmit}>
+			<Form layout='vertical' id="form2" onSubmit={this.registeSubmit}>
 				<FormItem label="账号">
 					{
 						getFieldDecorator('r_username', {
@@ -101,18 +106,29 @@ class FormLogin extends Component {
 		this.props.form.validateFieldsAndScroll((err,values) => {
 			if(!err){
 				console.log('Received values of form: ', values);
-				message.success('登陆成功!');
-				this.props.form.resetFields();
-				this.props.setModalVisible(false);
-				this.props.registerHandler(true);
-				this.props.setNickName(values.username);
+				axios.get('http://newsapi.gugujiankong.com/Handler.ashx?action='+this.props.action+'&username='+values.username+'&password='+values.password+'&r_userName='+values.r_username+'&r_password='+values.r_password+'&r_confirmPassword='+values.r_confirmpassword).then(res => {
+					var logindata = res.data;
+					console.log(logindata);
+					message.success('登陆成功!');
+					this.props.form.resetFields();
+					this.props.setModalVisible(false);
+					this.props.registerHandler(true);
+					this.props.setNickName(logindata.NickUserName);
+					Storage.save({
+						register: true,
+						nickname: logindata.NickUserName
+					})
+	        }).catch(res => {
+	        	message.error('帐号或密码错误!');
+	        });
+				
 			}
 		})
 	}
 	render(){
 		let {getFieldDecorator} = this.props.form;
 		return (
-			<Form layout='vertical' id="form1" hideRequiredMark ref={(form1)=>this.form_1 = form1} onSubmit={this.loginSubmit}>
+			<Form layout='vertical' id="form1" hideRequiredMark onSubmit={this.loginSubmit}>
 				<FormItem label="账号">
 					{
 						getFieldDecorator('username', {
@@ -138,13 +154,20 @@ export default class PCHeader extends Component {
 	constructor(){
 		super();
 		this.state = {
-			register: false,
+			register: Storage.fetch().register || false,
+			action: 'login',
 			visible: false,
-			nickname: ''
+			nickname: Storage.fetch().nickname || '',
 		};
 		this.setModalVisible = this.setModalVisible.bind(this);
 		this.registerHandler = this.registerHandler.bind(this);
 		this.setNickName = this.setNickName.bind(this);
+		this.changeAction = this.changeAction.bind(this);
+		this.logout = this.logout.bind(this);
+	}
+	componentDidMount(){
+		console.log(this.state.register);
+		console.log(this.state.nickname);
 	}
 	setModalVisible(value){
 		this.setState({
@@ -161,6 +184,32 @@ export default class PCHeader extends Component {
 			nickname: value
 		})
 	}
+	changeAction(key){
+		if(key == 1){
+			console.log('tab-login');
+			this.setState({
+				action: 'login'
+			})
+		}else{
+			console.log('tab-register');
+			this.setState({
+				action: 'register'
+			})
+		}
+	}
+	logout(){
+		this.registerHandler(false);
+		this.setNickName('');
+		this.setState({
+			action: 'login'
+		})	
+		Storage.save({
+			register: false,
+			nickname: ''
+		})
+		console.log(Storage.fetch().register);
+		console.log(Storage.fetch().nickname);
+	}
 	render(){
 		var lastMenuItem = !this.state.register
 		?
@@ -171,7 +220,7 @@ export default class PCHeader extends Component {
 			&nbsp;&nbsp;
 			<Button type="dashed" href="/user" target="_blank" className="usercenter">个人中心</Button>
 			&nbsp;&nbsp;
-			<Button type="ghost" onClick={this.registerHandler.bind(null,false)}>退出</Button>
+			<Button type="ghost" onClick={this.logout}>退出</Button>
 		</div>;
 		
 		return (
@@ -212,16 +261,17 @@ export default class PCHeader extends Component {
 					okText="关闭"
 					cancelText="取消"
 				>
-					<Tabs type='card' defaultActiveKey='1' animated={true}>
+					<Tabs type='card' defaultActiveKey='1' animated={true} onChange={this.changeAction.bind(this)}>
 						<TabPane tab="登录" key="1">
 							<LoginForm 
 								setModalVisible={this.setModalVisible} 
 								registerHandler={this.registerHandler}
 								setNickName={this.setNickName}
+								action={this.state.action}
 							/>
 						</TabPane>
 						<TabPane tab="注册" key="2">
-							<RegisterForm />
+							<RegisterForm action={this.state.action}/>
 						</TabPane>
 					</Tabs>
 				</Modal>

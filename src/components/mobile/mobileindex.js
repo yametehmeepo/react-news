@@ -3,7 +3,7 @@ import MobileHeader from './mobileheader';
 import MobileFooter from './mobilefooter';
 import '../../assets/css/mobile.css';
 
-export default class PCHeader extends Component {
+export default class MobileIndex extends Component {
 	render(){
 		return (
 			<div>

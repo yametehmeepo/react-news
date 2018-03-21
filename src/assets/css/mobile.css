@@ -1,6 +1,9 @@
 
-
-.mobileheader a{
+.mobileheader{
+	position: relative;
+	border-bottom: 1px solid #2db7f5;
+}
+.mobileheader .mblogo{
 	padding: 0 5px;
 	display: flex;
 	height: 50px;
@@ -12,12 +15,17 @@
 	width: 48px;
 	margin-right: 5px;
 }
-.mobileheader span{
+.mobileheader .mblogo span{
 	font-size: 20px;
 	color: #2db7f5;
 }
 
+@media screen and (max-width: 1224px){
+.mobileheader button span{
+	font-size: 12px;
+}	
 
+}
 
 
 

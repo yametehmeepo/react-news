@@ -40,7 +40,29 @@ body{
 	display: inline-block!important;
 }
 
-
+@media screen and (max-width: 1224px){
+.loginpanel{
+	position: absolute;
+	right: 10px;
+	top: 0;
+	line-height: 50px;
+}	
+.loginpanel button,
+.loginpanel a{
+	vertical-align: middle;
+}
+.loginpanel .ant-btn{
+	font-size: 12px;
+	height: 26px;
+	padding: 0 10px;
+	line-height: 26px;
+}
+.loginpanel i{
+	font-size: 24px;
+	color: #2db7f5;
+	vertical-align: middle;
+}
+}
 
 
 
