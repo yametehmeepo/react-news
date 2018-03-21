@@ -168,6 +168,7 @@ export default class PCHeader extends Component {
 	componentDidMount(){
 		console.log(this.state.register);
 		console.log(this.state.nickname);
+		console.log();
 	}
 	setModalVisible(value){
 		this.setState({

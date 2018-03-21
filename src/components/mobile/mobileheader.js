@@ -166,7 +166,7 @@ export default class MobileHeader extends Component {
 	}
 	componentDidMount(){
 		console.log(this.state.register);
-		console.log(this.state.nickname);
+		console.log(this.state.nickname); 
 	}
 	setModalVisible(value){
 		this.setState({
