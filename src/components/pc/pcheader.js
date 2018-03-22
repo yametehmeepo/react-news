@@ -227,14 +227,13 @@ export default class PCHeader extends Component {
 		return (
 			<header>
 				<Row>
-					<Col span={1}></Col>
-					<Col span={4}>
+					<Col span={5}>
 						<a href="/" className="logo">
 							<img src={require('../../assets/img/logo2.png')} alt="logo"/>
 							<span>ReactNews</span>
 						</a>
 					</Col>
-					<Col span={18} style={{position: 'relative'}}>
+					<Col span={19} style={{position: 'relative'}}>
 						<Menu
 							mode='horizontal'
 							defaultSelectedKeys={['1']}
@@ -252,7 +251,6 @@ export default class PCHeader extends Component {
 							{lastMenuItem}
 						</div>
 					</Col>
-					<Col span={1}></Col>
 				</Row>
 				<Modal
 					visible={this.state.visible}

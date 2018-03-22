@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Menu, Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
+//import { Row, Col, Menu} from 'antd';
+import { Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
 import axios from 'axios';
 import Storage from '../../assets/js/storage.js';
 

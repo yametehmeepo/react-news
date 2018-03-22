@@ -1,6 +1,5 @@
 
 body{
-	min-width: 1340px;
 	font-size: 12px!important;
 }
 .clearfix:after{
@@ -73,12 +72,22 @@ body{
 	vertical-align: middle;
 }
 }
+
 .content{
 	padding: 15px 0 0;
+}
+.content02{
+	margin-top: 10px;
+}
+.content03{
+	margin-top: 10px;
 }
 .leftContainer{
 	width: 400px;
 	float: left;
+}
+.carousel{
+	margin-bottom: 10px;
 }
 .ant-carousel .slick-slider {
     padding-bottom: 45px;
@@ -138,17 +147,70 @@ body{
     opacity: 0.75;
 }
 
+.newsList{
+	float: left;
+	width: 450px;
+	/* margin-left: 10px; */
+	min-height: 1px;
+}
+.productList{
+	float: left;
+	width: 368px;
+	min-height: 1px;
+}
+.topnewslist{
+	margin-bottom: 0!important;
+}
+.topnewslist a{
+	color: #666!important;
+}
+.topnewslist a:hover{
+	text-decoration: underline;
+}
+.topnewslist li{
+    height: 27px;
+    line-height: 27px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ant-card-body{
+	padding: 15px 15px 0!important;
+}
 
+@media screen and (max-width: 1224px){
 
-
-
-
-
-
-
-
-
-
+}
+.imagelisth3,
+.imagelistp{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 22px;
+    color: #666;
+    margin: 0;
+}
+.imagelistp{
+	font-size: 12px;
+    color: #999;
+}
+.imageclass{
+	width: 112px;
+	display: block;
+	margin-bottom: 5px;
+}
+.imageUl{
+	margin-left: -10px;
+}
+.imageUl li{
+	float: left;
+	padding: 0 0 5px 10px;
+}
+.imageUl li {
+	display: block;
+}
 
 
 

@@ -24,7 +24,10 @@
 .mobileheader button span{
 	font-size: 12px;
 }	
-
+.ant-tabs:not(.ant-tabs-vertical) > .ant-tabs-content > .ant-tabs-tabpane{
+    width: 100%;
+    padding: 0 10px;
+}
 }
 
 
