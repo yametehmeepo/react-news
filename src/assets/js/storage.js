@@ -3,10 +3,10 @@ const storage_name= 'reactnews';
 
 const Storage = {
 	fetch: function(){
-		return JSON.parse(localStorage.getItem(storage_name) || '{}')
+		return JSON.parse(sessionStorage.getItem(storage_name) || '{}')
 	},
 	save: function(data){
-		localStorage.setItem(storage_name, JSON.stringify(data))
+		sessionStorage.setItem(storage_name, JSON.stringify(data))
 	}
 }
 

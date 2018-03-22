@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Row, Col, Menu, Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
 import axios from 'axios';
-import Storage,{ storage_name } from '../../assets/js/storage.js';
+import Storage from '../../assets/js/storage.js';
 
-const MenuItem = Menu.Item;
+//const MenuItem = Menu.Item;
 const FormItem = Form.Item;
 const TabPane = Tabs.TabPane;
 class FormRegister extends Component {
@@ -184,7 +184,7 @@ export default class MobileHeader extends Component {
 		})
 	}
 	changeAction(key){
-		if(key == 1){
+		if(key === '1'){
 			console.log('tab-login');
 			this.setState({
 				action: 'login'

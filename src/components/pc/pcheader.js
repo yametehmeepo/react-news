@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col, Menu, Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
 import axios from 'axios';
-import Storage,{ storage_name } from '../../assets/js/storage.js';
+import Storage from '../../assets/js/storage.js';
 
 const MenuItem = Menu.Item;
 const FormItem = Form.Item;
@@ -186,7 +186,7 @@ export default class PCHeader extends Component {
 		})
 	}
 	changeAction(key){
-		if(key == 1){
+		if(key === '1'){
 			console.log('tab-login');
 			this.setState({
 				action: 'login'
@@ -227,14 +227,14 @@ export default class PCHeader extends Component {
 		return (
 			<header>
 				<Row>
-					<Col span={2}></Col>
+					<Col span={1}></Col>
 					<Col span={4}>
 						<a href="/" className="logo">
 							<img src={require('../../assets/img/logo2.png')} alt="logo"/>
 							<span>ReactNews</span>
 						</a>
 					</Col>
-					<Col span={16} style={{position: 'relative'}}>
+					<Col span={18} style={{position: 'relative'}}>
 						<Menu
 							mode='horizontal'
 							defaultSelectedKeys={['1']}
@@ -252,7 +252,7 @@ export default class PCHeader extends Component {
 							{lastMenuItem}
 						</div>
 					</Col>
-					<Col span={2}></Col>
+					<Col span={1}></Col>
 				</Row>
 				<Modal
 					visible={this.state.visible}
