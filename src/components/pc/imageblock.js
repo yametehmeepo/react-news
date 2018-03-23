@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'antd';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class ImageBlock extends Component {
 	constructor(){
@@ -30,11 +31,11 @@ export default class ImageBlock extends Component {
 					?
 					newslist.map((item,index) => (
 						<li key={index}>
-							<a href={item.url} target="_blank">
+							<Link to={`/details/${item.uniquekey}`} target="_blank">
 								<img src={item.thumbnail_pic_s} alt={item.title} title={item.title} className='imageclass' style={{width: this.props.imageWidth}}/>
 								<h3 className="imagelisth3" style={{width: this.props.imageWidth}}>{item.title}</h3>
 								<p className="imagelistp" style={{width: this.props.imageWidth}}>{item.author_name}</p>
-							</a>
+							</Link>
 						</li>
 					))
 					:

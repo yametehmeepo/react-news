@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-//import { List, Avatar } from 'antd';
 import axios from 'axios';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 //const ListItem = List.Item;
@@ -12,20 +11,26 @@ export default class MobileList extends Component {
 		super();
 		this.state = {
 			newslist: [],
-			downloadfinished: false
+			downloadfinished: false,
 		}
 	}
-	componentWillMount(){
+	componentDidMount(){
+		this._isMounted = true;
 		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getnews&type="+this.props.type+"&count="+this.props.count)
 		.then(res=>{
-			this.setState({
-				newslist: res.data,
-				downloadfinished: true
-			})
+			if(this._isMounted){
+				this.setState({
+					newslist: res.data,
+					downloadfinished: true
+				})	
+			}
 		})
 		.catch(res=>{
 
 		})
+	}
+	componentWillUnmount(){
+		this._isMounted = false;
 	}
 	render(){
 		const {newslist,downloadfinished} = this.state;
@@ -35,7 +40,7 @@ export default class MobileList extends Component {
 			?
 			newslist.map((item,index) => (
 				<li key={index}>
-					<a href={item.url} className="listWrap clearfix">
+					<a href={`/details/${item.uniquekey}`} className="listWrap clearfix">
 						<div className="listImg"><img src={item.thumbnail_pic_s} alt={item.title}/></div>
 						<div className="listContent">
 							<div><span>{item.title}</span></div>

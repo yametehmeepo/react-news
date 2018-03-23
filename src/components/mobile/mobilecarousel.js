@@ -12,7 +12,7 @@ export default class Mobilecarousel extends Component {
 			autoplaySpeed: 2000,
 			pauseOnHover: true,
 			draggable: false,
-			swipe: false,
+			swipe: true,
 			swipeToSlide: false
 		}
 		return (

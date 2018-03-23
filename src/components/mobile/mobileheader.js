@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import { Row, Col, Menu} from 'antd';
 import { Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Storage from '../../assets/js/storage.js';
 
@@ -166,8 +167,8 @@ export default class MobileHeader extends Component {
 		this.logout = this.logout.bind(this);
 	}
 	componentDidMount(){
-		console.log(this.state.register);
-		console.log(this.state.nickname); 
+		console.log("是否登陆: "+this.state.register);
+		console.log("用户昵称: "+this.state.nickname); 
 	}
 	setModalVisible(value){
 		this.setState({
@@ -223,10 +224,10 @@ export default class MobileHeader extends Component {
 		;
 		return (
 			<header className="mobileheader">
-				<a href="/" className="mblogo">
+				<Link to="/" className="mblogo">
 					<img src={require('../../assets/img/logo2.png')} alt="logo"/>
 					<span>ReactNews</span>
-				</a>
+				</Link>
 				<div className="loginpanel">
 					{lastMenuItem}
 				</div>

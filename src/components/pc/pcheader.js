@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Menu, Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Storage from '../../assets/js/storage.js';
 
@@ -166,8 +167,8 @@ export default class PCHeader extends Component {
 		this.logout = this.logout.bind(this);
 	}
 	componentDidMount(){
-		console.log(this.state.register);
-		console.log(this.state.nickname);
+		console.log("是否登陆: "+this.state.register);
+		console.log("用户昵称: "+this.state.nickname);
 		console.log();
 	}
 	setModalVisible(value){
@@ -238,14 +239,14 @@ export default class PCHeader extends Component {
 							mode='horizontal'
 							defaultSelectedKeys={['1']}
 						>
-							<MenuItem key='1'><Icon type="appstore" /><span>头条</span></MenuItem>
-							<MenuItem key='2'><Icon type="appstore" /><span>社会</span></MenuItem>
-							<MenuItem key='3'><Icon type="appstore" /><span>国内</span></MenuItem>
-							<MenuItem key='4'><Icon type="appstore" /><span>国际</span></MenuItem>
-							<MenuItem key='5'><Icon type="appstore" /><span>娱乐</span></MenuItem>
-							<MenuItem key='6'><Icon type="appstore" /><span>体育</span></MenuItem>
-							<MenuItem key='7'><Icon type="appstore" /><span>科技</span></MenuItem>
-							<MenuItem key='8'><Icon type="appstore" /><span>时尚</span></MenuItem>
+							<MenuItem key='1'><Link to="/"><Icon type="appstore" /><span>头条</span></Link></MenuItem>
+							<MenuItem key='2'><Link to="/shehui"><Icon type="appstore" /><span>社会</span></Link></MenuItem>
+							<MenuItem key='3'><Link to="/guonei"><Icon type="appstore" /><span>国内</span></Link></MenuItem>
+							<MenuItem key='4'><Link to="/guoji"><Icon type="appstore" /><span>国际</span></Link></MenuItem>
+							<MenuItem key='5'><Link to="/yule"><Icon type="appstore" /><span>娱乐</span></Link></MenuItem>
+							<MenuItem key='6'><Link to="/tiyu"><Icon type="appstore" /><span>体育</span></Link></MenuItem>
+							<MenuItem key='7'><Link to="/keji"><Icon type="appstore" /><span>科技</span></Link></MenuItem>
+							<MenuItem key='8'><Link to="/shishang"><Icon type="appstore" /><span>时尚</span></Link></MenuItem>
 						</Menu>
 						<div className="loginpanel">
 							{lastMenuItem}

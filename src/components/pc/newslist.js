@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'antd';
 import axios from 'axios';
-//import { Link } from 'react-router-dom';
-
+import { Link } from 'react-router-dom';
 
 
 export default class NewsList extends Component {
@@ -32,7 +31,7 @@ export default class NewsList extends Component {
 			list = newslist
 					?
 					newslist.map((item,index) => (
-						<li key={index}><a href={item.url} target="_blank">{item.title}</a></li>
+						<li key={index}><Link to={`/details/${item.uniquekey}`} target="_blank">{item.title}</Link></li>
 					))
 					:
 					'没有加载到任何新闻'

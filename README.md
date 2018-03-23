@@ -8,3 +8,5 @@ react-responsive插件 制作pc和手机端适配
   多个form表单通过每个表单写一个组件,每个组件都用Form.create()包裹的办法解决表单分开提交分开验证
 
 2.轮播图API参照  https://github.com/akiran/react-slick
+
+3.react-router v4 获取路由参数 `this.props.match.params.xxx`  (v4前没有 .match)
