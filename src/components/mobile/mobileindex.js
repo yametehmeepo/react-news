@@ -9,9 +9,7 @@ export default class MobileIndex extends Component {
 		return (
 			<div>
 				<MobileHeader />
-				<content>
-					<MobileBody />
-				</content>
+				<MobileBody />
 				<MobileFooter />
 			</div>
 		)

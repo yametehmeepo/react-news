@@ -10,7 +10,7 @@ export default class PCBody extends Component {
 				<div className="content01 clearfix">
 					<div className="leftContainer">
 						<PCcarousel />
-						<ImageBlock type="guoji" cardTitle="国际头条" width='100%' count={6} imageWidth={112}/>
+						<ImageBlock type="guoji" cardTitle="国际头条" width='100%' count={6} imageWidth="112px"/>
 					</div>
 					<div className="newsList">
 						<NewsBlock />
@@ -20,10 +20,10 @@ export default class PCBody extends Component {
 					</div>
 				</div>
 				<div className="content02">
-					<ImageBlock type="guonei" cardTitle="国内新闻" width='100%' count={8} imageWidth={146}/>
+					<ImageBlock type="shehui" cardTitle="社会新闻" width='100%' count={8} imageWidth="146px"/>
 				</div>
 				<div className="content03">
-					<ImageBlock type="yule" cardTitle="娱乐新闻" width='100%' count={16} imageWidth={146}/>
+					<ImageBlock type="caijing" cardTitle="财经新闻" width='100%' count={16} imageWidth="146px"/>
 				</div>
 			</div>
 		)
