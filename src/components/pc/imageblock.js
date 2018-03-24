@@ -48,7 +48,7 @@ export default class ImageBlock extends Component {
 		return (
 			<div>
 				<Card title={this.props.cardTitle} width={this.props.width} hoverable>
-					<ul className="imageUl">
+					<ul className="imageUl clearfix">
 						{list}
 					</ul>
 				</Card>

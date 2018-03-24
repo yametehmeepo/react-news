@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'antd';
 import ImageBlock from './imageblock.js';
+import DetailsCommit from './detailscommit.js';
+import CommitList from './commitlist.js';
+import PropTypes from 'prop-types';
 import axios from 'axios';
 //import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import '../../assets/css/details.min.css'
 
 
-export default class PCBody extends Component {
+export default class PCDetails extends Component {
 	constructor(){
 		super();
 		this.state = {
 			html: '<p>加载中</p>',
+		}
+	}
+	getChildContext(){
+		return {
+			uniquekey: this.props.match.params.uniquekey
 		}
 	}
 	componentDidMount(){
@@ -34,9 +42,22 @@ export default class PCBody extends Component {
 					</Col>
 					<Col span={18}>
 						<div className="detailsItem" dangerouslySetInnerHTML={{ __html: this.state.html }}></div>
+						<CommitList />
+						<DetailsCommit />
 					</Col>
 				</Row>
 			</div>
 		)
 	}
 }
+
+PCDetails.childContextTypes = {
+	uniquekey: PropTypes.string
+}
+
+
+
+
+
+
+

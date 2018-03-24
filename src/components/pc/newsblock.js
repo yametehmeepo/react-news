@@ -10,10 +10,10 @@ export default class NewsBlock extends Component {
 			<div>
 				<Tabs style={{padding: '0 10px 10px'}}>
 					<TabPane tab="头条新闻" key="1">
-						<NewsList type="top" count="21" />
+						<NewsList type="top" count="22" />
 					</TabPane>
 					<TabPane tab="国际" key="2">
-						<NewsList type="guoji" count="21" />
+						<NewsList type="guoji" count="22" />
 					</TabPane>
 				</Tabs>
 			</div>

@@ -207,6 +207,7 @@ body{
 	margin-bottom: 5px;
 }
 .imageUl{
+	overflow: hidden;
 	margin-left: -10px;
 }
 .imageUl li{
@@ -222,20 +223,47 @@ body{
 }
 .detailsItem{
 	padding: 0 20px;
+	margin-bottom: 40px;
+}
+.commitForm{
+	padding: 0 36px;
+}
+.commitForm .ant-form-item-label{
+	text-align: center!important;
+}
+.commitForm .ant-form-item-label label{
+	font-size: 16px;
+}
+.commitForm textarea{
+	height: 150px!important;
+}
+.commitBtn{
+	text-align: center;
+}
+.commitBtn button + button {
+	margin-left: 10px;
 }
 
-/*details css*/
-
-
-
-
-
-
-
-
-
-
-
+.commitlist{
+	padding: 0 36px;
+	margin: 40px 0;
+}
+.commitlist h3{
+	text-align: center;
+	font-size: 20px;
+	margin-bottom: 10px;
+	color: #000;
+}
+.ant-list-bordered .ant-list-item {
+    padding: 12px 24px 0!important;
+}
+.ant-list-vertical .ant-list-item-extra{
+	width: 120px!important;
+	margin-left: 45px!important;
+}
+.ant-list-vertical .ant-list-item-main{
+	word-break:break-all;
+}
 
 
 
