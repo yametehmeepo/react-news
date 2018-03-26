@@ -23,6 +23,7 @@ export default class CommitList extends Component {
 		const pagination = {
 		  defaultCurrent: defaultCurrent,
 		  total: totalcommitlist.length,
+		  size: this.context.pageSize,
 		  onChange: ((pageNumber) => {
 		  	if(pageNumber !== defaultCurrent){
 			  	this.setState({
@@ -63,6 +64,7 @@ export default class CommitList extends Component {
 CommitList.contextTypes = {
 	uniquekey: PropTypes.string,
 	totalcommitlist: PropTypes.array,
+	pageSize: PropTypes.string,
 }
 
 

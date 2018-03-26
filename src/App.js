@@ -45,10 +45,10 @@ class App extends Component {
     return (
       <div className="app">
       	<MediaQuery query="(min-device-width: 1224px)">
-      		<PCIndex />
+      		<PCIndex pageSize=""/>
       	</MediaQuery>
       	<MediaQuery query="(max-device-width: 1224px)">
-      		<MobileIndex />
+      		<MobileIndex pageSize="small"/>
       	</MediaQuery>
 	  </div>
     );

@@ -23,11 +23,10 @@ class DetailsCommit extends Component {
 	}
 	commitsubmit(e){
 		e.preventDefault();
-		var commit = this.props.form.getFieldValue('commit');
-		console.log('提交评论');
-		console.log(commit);
+		var commit = trim(this.props.form.getFieldValue('commit'));
 		this.props.form.resetFields();
 		if(commit){
+			console.log('提交评论: '+commit);
 			axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=comment&userid="+this.context.userId+"&uniquekey="+this.context.uniquekey+"&commnet="+commit)
 			.then( res => {
 				this.props.getCommit();
@@ -35,7 +34,6 @@ class DetailsCommit extends Component {
 			.catch( res => {
 
 			});	
-			
 		}
 	}
 	render(){

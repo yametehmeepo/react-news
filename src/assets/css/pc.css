@@ -265,7 +265,31 @@ body{
 	word-break:break-all;
 }
 
+@media screen and (max-width: 1224px){
+.ant-list-vertical .ant-list-item-extra-wrap{
+	display: block!important;
 
+}
+.ant-list-bordered .ant-list-item{
+	padding: 12px 16px!important;
+}
+.ant-list-vertical .ant-list-item-meta{
+	margin: 0!important;
+}
+.ant-list-vertical .ant-list-item-extra{
+	display: block;
+	width: 100%!important;
+	margin: 0!important;
+	text-align: right!important;
+}
+.commitlist{
+	padding: 0 16px;
+	margin: 40px 0;
+}	
+.commitForm{
+	padding: 0 16px;
+}
+}
 
 
 

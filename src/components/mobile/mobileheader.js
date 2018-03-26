@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { Icon, Button, Form, Input, Modal, Tabs, message} from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import PubSub from 'pubsub-js';
 import Storage from '../../assets/js/storage.js';
 
 //const MenuItem = Menu.Item;
@@ -118,7 +119,12 @@ class FormLogin extends Component {
 					Storage.save({
 						register: true,
 						nickname: logindata.NickUserName
-					})
+					});
+					PubSub.publish('STORAGE',{
+						register: true,
+						nickname: logindata.NickUserName,
+						userId: logindata.UserId,
+					});
 	        }).catch(res => {
 	        	message.error('帐号或密码错误!');
 	        });
@@ -206,10 +212,14 @@ export default class MobileHeader extends Component {
 		})	
 		Storage.save({
 			register: false,
-			nickname: ''
+			nickname: '',
+			userId: 0,
+		});
+		PubSub.publish('STORAGE', {
+			register: false,
+			nickname: '',
+			userId: 0,
 		})
-		console.log(Storage.fetch().register);
-		console.log(Storage.fetch().nickname);
 	}
 	render(){
 		var lastMenuItem = this.state.register

@@ -6,7 +6,12 @@ import CommitList from './commitlist.js';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 //import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import '../../assets/css/details.min.css'
+//import Pswp from '../common/pswp.js';
+import '../../assets/css/details.min.css';
+//import '../../assets/css/photoswipe.css';
+//import '../../assets/css/default-skin.css';
+//import '../../assets/js/photoswipe.min.js';
+//import '../../assets/js/photoswipe-ui-default.min.js';
 
 
 export default class PCDetails extends Component {
