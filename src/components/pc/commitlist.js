@@ -9,24 +9,15 @@ export default class CommitList extends Component {
 		super();
 		this.state = {
 		  	defaultPageSize: 10,
-			totalcommitlist: [],
 			defaultCurrent: 1,
 		}
 	}
 	componentWillMount(){
-		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getcomments&uniquekey="+this.context.uniquekey)
-		.then( res => {
-			//console.log(res.data);
-			this.setState({
-				totalcommitlist: res.data.reverse(),
-			})
-		})
-		.catch( res => {
-
-		})
+		
 	}
 	render(){
-		const {totalcommitlist,defaultPageSize,defaultCurrent} = this.state;
+		const {defaultPageSize,defaultCurrent} = this.state;
+		const totalcommitlist = this.context.totalcommitlist;
 		var currentcommitlist = totalcommitlist.slice(defaultPageSize*(defaultCurrent - 1),defaultPageSize*defaultCurrent);
 		//console.log(currentcommitlist);
 		const pagination = {
@@ -70,7 +61,8 @@ export default class CommitList extends Component {
 }
 
 CommitList.contextTypes = {
-	uniquekey: PropTypes.string
+	uniquekey: PropTypes.string,
+	totalcommitlist: PropTypes.array,
 }
 
 

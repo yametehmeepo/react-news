@@ -16,22 +16,26 @@ class App extends Component {
     this.state = {
       isLogined: Storage.fetch().register || false,
       nickname: Storage.fetch().nickname || '',
+      userId: Storage.fetch().userId || 0,
     }
   }
   getChildContext(){
     return {
       isLogined: this.state.isLogined,
-      nickname: this.state.nickName
+      nickname: this.state.nickName,
+      userId: this.state.userId,
     }
   }
   componentDidMount(){
     PubSub.subscribe('STORAGE', (msg,storageObj)=>{
       this.setState({
         isLogined: storageObj.register,
-        nickname: storageObj.nickname
+        nickname: storageObj.nickname,
+        userId: storageObj.userId,
       })
       //console.log("isLogined: "+storageObj.register);
       //console.log("nickname: "+storageObj.nickname);
+      //console.log("userId: "+storageObj.userId);
     });
   }
   componentWillUnmount(){
@@ -55,7 +59,8 @@ export default App;
 
 App.childContextTypes = {
   isLogined: PropTypes.bool,
-  nickname: PropTypes.string
+  nickname: PropTypes.string,
+  userId: PropTypes.number,
 }
 
 

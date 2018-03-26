@@ -118,11 +118,13 @@ class FormLogin extends Component {
 					this.props.setNickName(logindata.NickUserName);
 					Storage.save({
 						register: true,
-						nickname: logindata.NickUserName
+						nickname: logindata.NickUserName,
+						userId: logindata.UserId,
 					});
 					PubSub.publish('STORAGE',{
 						register: true,
-						nickname: logindata.NickUserName
+						nickname: logindata.NickUserName,
+						userId: logindata.UserId,
 					});
 
 	        }).catch(res => {
@@ -213,11 +215,13 @@ export default class PCHeader extends Component {
 		})	
 		Storage.save({
 			register: false,
-			nickname: ''
+			nickname: '',
+			userId: 0,
 		});
 		PubSub.publish('STORAGE', {
 			register: false,
-			nickname: ''
+			nickname: '',
+			userId: 0,
 		})
 		//document.location.reload();
 	}

@@ -14,11 +14,14 @@ export default class PCDetails extends Component {
 		super();
 		this.state = {
 			html: '<p>加载中</p>',
-		}
+			totalcommitlist: [],
+		};
+		this.getCommit = this.getCommit.bind(this);
 	}
 	getChildContext(){
 		return {
-			uniquekey: this.props.match.params.uniquekey
+			uniquekey: this.props.match.params.uniquekey,
+			totalcommitlist: this.state.totalcommitlist,
 		}
 	}
 	componentDidMount(){
@@ -28,6 +31,19 @@ export default class PCDetails extends Component {
 				html: res.data.pagecontent,
 			});
 			document.title = res.data.title + " - React News | React 驱动的新闻平台";
+		})
+		.catch( res => {
+
+		});
+		this.getCommit();
+	}
+	getCommit(){
+		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getcomments&uniquekey="+this.props.match.params.uniquekey)
+		.then( res => {
+			//console.log(res.data);
+			this.setState({
+				totalcommitlist: res.data.reverse(),
+			})
 		})
 		.catch( res => {
 
@@ -43,7 +59,7 @@ export default class PCDetails extends Component {
 					<Col span={18}>
 						<div className="detailsItem" dangerouslySetInnerHTML={{ __html: this.state.html }}></div>
 						<CommitList />
-						<DetailsCommit />
+						<DetailsCommit getCommit={this.getCommit}/>
 					</Col>
 				</Row>
 			</div>
@@ -51,8 +67,10 @@ export default class PCDetails extends Component {
 	}
 }
 
+
 PCDetails.childContextTypes = {
-	uniquekey: PropTypes.string
+	uniquekey: PropTypes.string,
+	totalcommitlist: PropTypes.array,
 }
 
 
