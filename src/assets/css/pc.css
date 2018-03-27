@@ -292,12 +292,27 @@ body{
 }
 
 
+.usercenterblock{
+	margin: 50px 0;
+}
 
-
-
-
-
-
+.ant-tabs-vertical.ant-tabs-left > .ant-tabs-content{
+	padding-left: 50px!important;
+}
+.usercenterblock .ant-list-bordered .ant-list-item{
+	padding: 12px 24px!important;
+}
+.usercenterblock .ant-card + .ant-card {
+	margin: 10px 0 0;
+}
+@media screen and (max-width: 1224px){
+.usercenterblock{
+	margin: 0;
+}
+.ant-tabs-tabpane {
+	padding: 10px!important;
+}
+}
 
 
 

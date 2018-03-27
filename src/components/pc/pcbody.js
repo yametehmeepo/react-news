@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PCTopContent from './pctopcontent.js';
 import PCDetails from './pcnewsdetails.js';
+import PCUserCenter from './pcusercenter.js';
 import PCShehui from './pcshehui.js';
 import PCGuonei from './pcguonei.js';
 import PCGuoji from './pcguoji.js';
@@ -17,6 +18,7 @@ export default class PCBody extends Component {
 				<Switch>
 					<Route exact path="/" component={PCTopContent} />
 					<Route path="/details/:uniquekey" component={PCDetails} />
+					<Route path="/usercenter" component={PCUserCenter} />
 					<Route path="/shehui" component={PCShehui} />
 					<Route path="/guonei" component={PCGuonei} />
 					<Route path="/guoji" component={PCGuoji} />

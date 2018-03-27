@@ -3,7 +3,7 @@ import { Row, Col, Menu, Icon, Button, Form, Input, Modal, Tabs, message} from '
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PubSub from 'pubsub-js';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import Storage from '../../assets/js/storage.js';
 
 const MenuItem = Menu.Item;
@@ -253,6 +253,13 @@ export default class PCHeader extends Component {
 		})
 		//document.location.reload();
 	}
+	gotousercenter(e){
+		var isLogined = Storage.fetch().register;
+		if(!isLogined){
+			e.preventDefault();
+			window.open('http://localhost:3000/');
+		}
+	}
 	render(){
 		var lastMenuItem = !this.state.register
 		?
@@ -261,7 +268,7 @@ export default class PCHeader extends Component {
 		<div>
 			<Button type="primary">{this.state.nickname}</Button>
 			&nbsp;&nbsp;
-			<Button type="dashed" href="/user" target="_blank" className="usercenter">个人中心</Button>
+			<Button type="dashed" href="/usercenter" target="_blank" className="usercenter" onClick={this.gotousercenter.bind(this)}>个人中心</Button>
 			&nbsp;&nbsp;
 			<Button type="ghost" onClick={this.logout}>退出</Button>
 		</div>;
@@ -322,7 +329,9 @@ export default class PCHeader extends Component {
 }
 
 
-
+PCHeader.contextTypes = {
+	isLogined: PropTypes.bool,
+}
 
 
 
