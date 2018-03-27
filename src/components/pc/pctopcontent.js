@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import PCcarousel from './pccarousel.js';
 import NewsBlock from './newsblock.js';
 import ImageBlock from './imageblock.js';
+import PCProducts from './pcproducts.js'
+import { Tabs } from 'antd';
+
+const TabPane = Tabs.TabPane;
 
 export default class PCTopContent extends Component {
 	render(){
@@ -16,7 +20,14 @@ export default class PCTopContent extends Component {
 						<NewsBlock />
 					</div>
 					<div className="productList">
+						<Tabs
+							defaultActiveKey="1"
 
+						>
+							<TabPane tab="ReactNews 产品" key="1">
+								<PCProducts />
+							</TabPane>
+						</Tabs>
 					</div>
 				</div>
 				<div className="content02">

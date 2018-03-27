@@ -22,3 +22,5 @@ react-responsive插件 制作pc和手机端适配
 
 7.List组件的pagination属性不能按每页显示数量自动进行分割,  
 只能把要往List的dataSource传递的数据手动进行分割显示   
+
+8.快速复用HTML代码----HTMLtoJSX(https://magic.reactjs.net/htmltojsx.htm)

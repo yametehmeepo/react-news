@@ -29,6 +29,8 @@ export default class PCUserCenter extends Component {
 	componentWillMount(){
 		if(!this.context.isLogined){
 			window.location.href="http://localhost:3000/";
+		}else{
+			document.title = "用户中心";
 		}
 	}
 	componentDidMount(){
@@ -100,7 +102,7 @@ export default class PCUserCenter extends Component {
 		const uploadButton = (
 			<div>
 				<Icon type="plus" />
-				<div className="ant-upload-text">Upload</div>
+				<div className="ant-upload-text">上传照片</div>
 			</div>
 		);
 
