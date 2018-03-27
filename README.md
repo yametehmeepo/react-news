@@ -18,4 +18,7 @@ react-responsive插件 制作pc和手机端适配
 最后选择 `localStorage` 在每次点登录和退出时更新 `localStorage`      
 
 6.提交评论发送ajax后一定要在请求成功`返回数据`时再去发起获取新闻评论的请求  
- 否则评论列表不能渲染出用户提交过的评论
+ 否则评论列表不能渲染出用户提交过的评论  
+
+7.List组件的pagination属性不能按每页显示数量自动进行分割,  
+只能把要往List的dataSource传递的数据手动进行分割显示   

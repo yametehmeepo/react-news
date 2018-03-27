@@ -246,11 +246,18 @@ export default class MobileHeader extends Component {
 			userId: 0,
 		})
 	}
+	gotousercenter(e){
+		var isLogined = Storage.fetch().register;
+		if(!isLogined){
+			e.preventDefault();
+			window.open('http://localhost:3000/');
+		}
+	}
 	render(){
 		var lastMenuItem = this.state.register
 		?
 		<div>
-			<Button type="primary" href="/">个人中心</Button>
+			<Button type="primary" href="/usercenter" onClick={this.gotousercenter.bind(this)}>个人中心</Button>
 			&nbsp;&nbsp;
 			<Button type="default" onClick={this.logout}>退出</Button>
 		</div>

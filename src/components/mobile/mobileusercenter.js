@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { List, Tabs, Card } from 'antd';
+import { List, Tabs, Card, Upload, Icon, Modal } from 'antd';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
@@ -16,6 +16,19 @@ export default class MobileUserCenter extends Component {
 			currentcollectpage: 1,
 			commentlist: '',
 			collectpagesize: 15,
+			previewVisible: false,
+			previewImage: '',
+			fileList: [{
+				uid: -1,
+				name: 'xxx.png',
+				status: 'done',
+				url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+			}],
+		}
+	}
+	componentWillMount(){
+		if(!this.context.isLogined){
+			window.location.href="http://localhost:3000/";
 		}
 	}
 	componentDidMount(){
@@ -46,8 +59,22 @@ export default class MobileUserCenter extends Component {
 		});	
 
 	}
+	handlePreview(file){
+		this.setState({
+			previewImage: file.url || file.thumbUrl,
+			previewVisible: true,
+	    });
+	}
+	handleChange({fileList}){
+		this.setState({fileList});
+	}
+	handleCancel(){
+		this.setState({
+			previewVisible: false,
+		})
+	}
 	render(){
-		var {collectlist, commentlist, currentcollectpage, collectpagesize} = this.state;
+		var { collectlist, commentlist, currentcollectpage, collectpagesize, previewVisible, previewImage, fileList } = this.state;
 		var reactcollectlist = collectlist.slice(collectpagesize*(currentcollectpage - 1), collectpagesize*currentcollectpage);
 		var reactcommentlist = commentlist.length
 		?
@@ -70,6 +97,12 @@ export default class MobileUserCenter extends Component {
 			  }
 		  }),
 		}
+		const uploadButton = (
+			<div>
+				<Icon type="plus" />
+				<div className="ant-upload-text">Upload</div>
+			</div>
+		);
 		return (
 			<div className="usercenterblock">
 				<Tabs
@@ -91,7 +124,22 @@ export default class MobileUserCenter extends Component {
 					<TabPane tab='我的评论列表' key='2'>
 						{reactcommentlist}
 					</TabPane>
-					<TabPane tab='头像设置' key='3'>头像设置</TabPane>
+					<TabPane tab='头像设置' key='3'>
+						<div className="clearfix">
+							<Upload
+								action="//jsonplaceholder.typicode.com/posts/"
+								listType="picture-card"
+								fileList={fileList}
+								onPreview={this.handlePreview.bind(this)}
+								onChange={this.handleChange.bind(this)}
+							>
+								{fileList.length>=5?null:uploadButton}
+							</Upload>
+							<Modal visible={previewVisible} onCancel={this.handleCancel.bind(this)} onOk={this.handleCancel.bind(this)}>
+								<img src={previewImage} alt="预览图片" style={{width: '100%'}}/>
+							</Modal>
+						</div>
+					</TabPane>
 				</Tabs>	
 			</div>
 		)

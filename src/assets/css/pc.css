@@ -309,7 +309,7 @@ body{
 .usercenterblock{
 	margin: 0;
 }
-.ant-tabs-tabpane {
+.usercenterblock .ant-tabs-tabpane {
 	padding: 10px!important;
 }
 }
