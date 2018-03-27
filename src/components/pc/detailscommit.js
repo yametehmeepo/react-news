@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message, notification } from 'antd';
 import PropTypes from 'prop-types';
+import PubSub from 'pubsub-js';
 //import Storage from '../../assets/js/storage.js';
 import axios from 'axios';
 
@@ -16,16 +17,48 @@ function trim(str){
 class DetailsCommit extends Component {
 	constructor(){
 		super();
+		this.state = {
+			isCollected: false,
+		}
 	}
 	componentWillMount(){
 		console.log("userid: "+this.context.userId);
 		console.log("uniquekey: "+this.context.uniquekey);
+		if(this.context.isLogined){
+			axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getuc&userid="+this.context.userId)
+			.then( res => {
+				var hasArticle = false;
+				res.data.forEach((item,index) => {
+					if(item.uniquekey === this.context.uniquekey){
+						hasArticle = true;
+						return false;
+					}
+				});
+				if(hasArticle){
+					this.setState({
+						isCollected: true,
+					})
+				}
+			})
+			.catch( res => {
+
+			});	
+		}
+		
+	}
+	componentDidMount(){
+		PubSub.subscribe('UpdateCollect',()=>{
+			this.componentWillMount();
+		})
+	}
+	componentWillUnmount(){
+		PubSub.unsubscribe('UpdateCollect');
 	}
 	commitsubmit(e){
 		e.preventDefault();
-		var commit = trim(this.props.form.getFieldValue('commit'));
+		var commit = trim(this.props.form.getFieldValue('commit') || '');
 		this.props.form.resetFields();
-		if(commit){
+		if(commit !== ''){
 			console.log('提交评论: '+commit);
 			axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=comment&userid="+this.context.userId+"&uniquekey="+this.context.uniquekey+"&commnet="+commit)
 			.then( res => {
@@ -34,7 +67,23 @@ class DetailsCommit extends Component {
 			.catch( res => {
 
 			});	
+		}else{
+			message.error('请输入评论内容!');
 		}
+	}
+	collectArticle(){
+		axios.get('http://newsapi.gugujiankong.com/Handler.ashx?action=uc&userid='+this.context.userId+'&uniquekey='+this.context.uniquekey)
+		.then( res => {
+			//console.log(res);
+			this.setState({
+				isCollected: true,
+			});
+			notification.success({message: 'ReactNews收藏提醒',description:'文章收藏成功!'});
+
+		})
+		.catch( res => {
+
+		});
 	}
 	render(){
 		
@@ -44,6 +93,17 @@ class DetailsCommit extends Component {
 			wrapperCol: { span: 24}
 		}
 		const isLogined = this.context.isLogined;
+		var collectText = null;
+		if(!isLogined){
+			collectText = '登录收藏文章';
+		}
+		else{
+			if(this.state.isCollected){
+				collectText = "已收藏文章";
+			}else{
+				collectText = '收藏该文章';
+			}
+		}
 		return (
 			<div className="commitForm">
 				<Form onSubmit={this.commitsubmit.bind(this)}>
@@ -55,7 +115,7 @@ class DetailsCommit extends Component {
 					<FormItem>
 						<div className="commitBtn">
 							<Button type="primary" htmlType="submit" disabled={!isLogined}>{isLogined?'提交  评论':'登录发表评论'}</Button>
-							<Button type="primary" htmlType="button">收藏该文章</Button>
+							<Button type="primary" htmlType="button" onClick={this.collectArticle.bind(this)} disabled={!isLogined || this.state.isCollected}>{collectText}</Button>
 						</div>
 					</FormItem>
 				</Form>

@@ -3,6 +3,7 @@ import { Row, Col, Menu, Icon, Button, Form, Input, Modal, Tabs, message} from '
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PubSub from 'pubsub-js';
+//import PropTypes from 'prop-types';
 import Storage from '../../assets/js/storage.js';
 
 const MenuItem = Menu.Item;
@@ -14,6 +15,8 @@ class FormRegister extends Component {
 		super();
 		this.state = {
 			confirmDirty: false,
+			registertext: '注册',
+			clicked: false,
 		};
 		this.registeSubmit = this.registeSubmit.bind(this);
 		this.handleConfirm = this.handleConfirm.bind(this);
@@ -22,19 +25,29 @@ class FormRegister extends Component {
 	}
 	registeSubmit(e){
 		e.preventDefault();
-		console.log('注册')
 	    this.props.form.validateFieldsAndScroll((err, values) => {
 	      if (!err) {
-	        console.log('Received values of form: ', values);
-	        axios.get('http://newsapi.gugujiankong.com/Handler.ashx?action='+this.props.action+'&username=userName&password=password&r_userName='+values.r_username+'&r_password='+values.r_password+'&r_confirmPassword='+values.r_confirmpassword).then(res => {
-	        	message.success('注册成功!')
-	        	this.props.form.resetFields();
-	        }).catch(res => {
+	      	if(!this.state.clicked){
+	      		console.log('注册');
+		        console.log('Received values of form: ', values);
+		        this.setState({
+					registertext: '注册中...',
+					clicked: true,
+				});
+		        axios.get('http://newsapi.gugujiankong.com/Handler.ashx?action='+this.props.action+'&username=userName&password=password&r_userName='+values.r_username+'&r_password='+values.r_password+'&r_confirmPassword='+values.r_confirmpassword).then(res => {
+		        	message.success('注册成功!')
+		        	this.props.form.resetFields();
+		        	this.setState({
+						registertext: '注册',
+						clicked: false,
+					});
+		        }).catch(res => {
 
-	        });
-	        
+		        });
+	        }
 	      }
 	    });
+		
 	}
 	compareToFirstPassword(rule, value, callback){
 		const form = this.props.form;
@@ -90,7 +103,7 @@ class FormRegister extends Component {
 						})( <Input type="password" placeholder="请再次输入您的密码" className="radiusInput" onBlur={this.handleConfirm}/>)
 					}
 				</FormItem>
-				<Button type="primary" htmlType="submit" form="form2">注册</Button>
+				<Button type="primary" htmlType="submit" form="form2" disabled={this.state.clicked}>{this.state.registertext}</Button>
 			</Form>
 		)
 	}
@@ -100,39 +113,54 @@ const RegisterForm = Form.create({})(FormRegister);
 class FormLogin extends Component {
 	constructor(){
 		super();
+		this.state = {
+			logintext: '登录',
+			clicked: false,
+		}
 		this.loginSubmit = this.loginSubmit.bind(this);
 	}
 	loginSubmit(e){
 		e.preventDefault();
-		console.log('登录')
 		this.props.form.validateFieldsAndScroll((err,values) => {
 			if(!err){
-				console.log('Received values of form: ', values);
-				axios.get('http://newsapi.gugujiankong.com/Handler.ashx?action='+this.props.action+'&username='+values.username+'&password='+values.password+'&r_userName='+values.r_username+'&r_password='+values.r_password+'&r_confirmPassword='+values.r_confirmpassword).then(res => {
-					var logindata = res.data;
-					console.log(logindata);
-					message.success('登陆成功!');
-					this.props.form.resetFields();
-					this.props.setModalVisible(false);
-					this.props.registerHandler(true);
-					this.props.setNickName(logindata.NickUserName);
-					Storage.save({
-						register: true,
-						nickname: logindata.NickUserName,
-						userId: logindata.UserId,
+				if(!this.state.clicked){
+					console.log('登录');
+					console.log('Received values of form: ', values);
+					this.setState({
+						logintext: '登录中...',
+						clicked: true,
 					});
-					PubSub.publish('STORAGE',{
-						register: true,
-						nickname: logindata.NickUserName,
-						userId: logindata.UserId,
-					});
-
-	        }).catch(res => {
-	        	message.error('帐号或密码错误!');
-	        });
+					axios.get('http://newsapi.gugujiankong.com/Handler.ashx?action='+this.props.action+'&username='+values.username+'&password='+values.password+'&r_userName='+values.r_username+'&r_password='+values.r_password+'&r_confirmPassword='+values.r_confirmpassword).then(res => {
+						var logindata = res.data;
+						message.success('登陆成功!');
+						this.props.form.resetFields();
+						this.props.setModalVisible(false);
+						this.props.registerHandler(true);
+						this.props.setNickName(logindata.NickUserName);
+						this.setState({
+							logintext: '登录',
+							clicked: false,
+						});
+						Storage.save({
+							register: true,
+							nickname: logindata.NickUserName,
+							userId: logindata.UserId,
+						});
+						PubSub.publish('STORAGE',{
+							register: true,
+							nickname: logindata.NickUserName,
+							userId: logindata.UserId,
+						});
+						PubSub.publish('UpdateCollect');
+			        }).catch(res => {
+			        	message.error('帐号或密码错误!');
+			        });	
+				}
+				
 				
 			}
 		})
+		
 	}
 	render(){
 		let {getFieldDecorator} = this.props.form;
@@ -152,7 +180,7 @@ class FormLogin extends Component {
 						})( <Input type="password" placeholder="请输入您的密码" className="radiusInput"/>)
 					}
 				</FormItem>
-				<Button type="primary" htmlType="submit" form="form1">登录</Button>
+				<Button type="primary" htmlType="submit" form="form1" disabled={this.state.clicked}>{this.state.logintext}</Button>
 			</Form>
 		)
 	}

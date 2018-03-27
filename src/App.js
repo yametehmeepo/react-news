@@ -33,9 +33,6 @@ class App extends Component {
         nickname: storageObj.nickname,
         userId: storageObj.userId,
       })
-      //console.log("isLogined: "+storageObj.register);
-      //console.log("nickname: "+storageObj.nickname);
-      //console.log("userId: "+storageObj.userId);
     });
   }
   componentWillUnmount(){

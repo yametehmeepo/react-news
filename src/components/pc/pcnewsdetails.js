@@ -5,6 +5,7 @@ import DetailsCommit from './detailscommit.js';
 import CommitList from './commitlist.js';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+//import PubSub from 'pubsub-js';
 //import { BrowserRouter as Router, Route, Link} from 'react-router-dom';
 //import Pswp from '../common/pswp.js';
 import '../../assets/css/details.min.css';
@@ -29,7 +30,11 @@ export default class PCDetails extends Component {
 			totalcommitlist: this.state.totalcommitlist,
 		}
 	}
+	componentWillMount(){
+		
+	}
 	componentDidMount(){
+		this.getCommit();
 		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getnewsitem&uniquekey=" + this.props.match.params.uniquekey)
 		.then( res => {
 			this.setState({
@@ -40,7 +45,6 @@ export default class PCDetails extends Component {
 		.catch( res => {
 
 		});
-		this.getCommit();
 	}
 	getCommit(){
 		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getcomments&uniquekey="+this.props.match.params.uniquekey)

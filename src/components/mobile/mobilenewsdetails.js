@@ -25,6 +25,7 @@ export default class MobileNewsDetails extends Component {
 		}
 	}
 	componentDidMount(){
+		this.getCommit();
 		this._isMounted = true;
 		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getnewsitem&uniquekey=" + this.props.match.params.uniquekey)
 		.then( res => {
@@ -38,23 +39,6 @@ export default class MobileNewsDetails extends Component {
 		.catch( res => {
 
 		});
-		this.getCommit();
-	}
-	componentWillReceiveProps(nextProps){
-		this.setState({
-			uniquekey: nextProps.match.params.uniquekey
-		})
-	}
-	componentDidUpdate(){
-		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getnewsitem&uniquekey=" + this.state.uniquekey)
-		.then( res => {
-			this.setState({
-				html: res.data.pagecontent,
-			});
-		})
-		.catch( res => {
-
-		})
 	}
 	componentWillUnmount(){
 		this._isMounted = false;

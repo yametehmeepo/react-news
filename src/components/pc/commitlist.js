@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List } from 'antd';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+//import axios from 'axios';
 
 
 export default class CommitList extends Component {
@@ -11,9 +11,6 @@ export default class CommitList extends Component {
 		  	defaultPageSize: 10,
 			defaultCurrent: 1,
 		}
-	}
-	componentWillMount(){
-		
 	}
 	render(){
 		const {defaultPageSize,defaultCurrent} = this.state;
@@ -35,8 +32,7 @@ export default class CommitList extends Component {
 		return (
 			<div className="commitlist">
 				<h3>大家说</h3>
-				<List 
-					rowKey={1}
+				<List
 					itemLayout="vertical"
 					bordered={true}
 					pagination={pagination}
@@ -45,7 +41,7 @@ export default class CommitList extends Component {
 					renderItem={(item,index) => (
 						<List.Item
 							key={index}
-							extra={[<span>发布于 {item.datetime}</span>]}
+							extra={[<span key={index}>发布于 {item.datetime}</span>]}
 						>
 							<List.Item.Meta 
 								title={<span>{item.UserName}</span>} 
