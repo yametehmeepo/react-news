@@ -257,7 +257,7 @@ export default class MobileHeader extends Component {
 		var lastMenuItem = this.state.register
 		?
 		<div>
-			<Link to="/usercenter" onClick={this.gotousercenter.bind(this)}>
+			<Link to="/usercenter" onClick={this.gotousercenter.bind(this)} style={{marginTop: '-4px',display: 'inline-block'}}>
 				<Button type="primary" className="usercenter">个人中心</Button>
 			</Link>
 			&nbsp;&nbsp;
