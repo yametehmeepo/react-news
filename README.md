@@ -27,4 +27,9 @@ react-responsive插件 制作pc和手机端适配
 
 9.箭头函数写无状态组件
 ` const ComponentName = (props) => () `
-如果props是对象 可以写成 `({props1,props2})` 的形式
+如果props是对象 可以写成 `({props1,props2})` 的形式  
+
+10.手机端newsdetails页点击底部图片新闻链接时,地址栏uniquekey参数变了但是页面没有刷新  
+通过`componentWillReceiveProps(nextProps)` 的nextProps参数去获取新的uniquekey  
+**const id = nextProps.match.params.uniquekey**  接着重新获取新的详情页数据重新渲染html  
+**还需注意** 点击链接请求完毕页面是不会回到顶部的，用户体验欠缺一些，通过`window.scroll(0,0)`实现瞬间回到顶部

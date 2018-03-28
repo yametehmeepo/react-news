@@ -257,7 +257,9 @@ export default class MobileHeader extends Component {
 		var lastMenuItem = this.state.register
 		?
 		<div>
-			<Button type="primary" href="/usercenter" onClick={this.gotousercenter.bind(this)}>个人中心</Button>
+			<Link to="/usercenter" onClick={this.gotousercenter.bind(this)}>
+				<Button type="primary" className="usercenter">个人中心</Button>
+			</Link>
 			&nbsp;&nbsp;
 			<Button type="default" onClick={this.logout}>退出</Button>
 		</div>

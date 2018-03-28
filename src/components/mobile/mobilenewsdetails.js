@@ -43,6 +43,25 @@ export default class MobileNewsDetails extends Component {
 	componentWillUnmount(){
 		this._isMounted = false;
 	}
+	componentWillReceiveProps(nextProps){
+		const uniquekey = nextProps.match.params.uniquekey;
+		//console.log("componentWillReceiveProps: "+uniquekey);
+		this.setState({
+			html: '数据加载中...',
+		});	
+			window.scroll(0,0);
+		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getnewsitem&uniquekey=" + uniquekey)
+		.then( res => {
+			if(this._isMounted){
+				this.setState({
+					html: res.data.pagecontent,
+				});	
+			}
+		})
+		.catch( res => {
+
+		});
+	}
 	getCommit(){
 		axios.get("http://newsapi.gugujiankong.com/Handler.ashx?action=getcomments&uniquekey="+this.props.match.params.uniquekey)
 		.then( res => {

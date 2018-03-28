@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { List, Tabs, Card, Upload, Icon, Modal } from 'antd';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const TabPane = Tabs.TabPane;
 const ListItem = List.Item;
@@ -89,7 +90,7 @@ export default class MobileUserCenter extends Component {
 		var reactcommentlist = commentlist.length
 		?
 		commentlist2.map((item,index) => (
-			<Card key={index} title={`于 ${item.datetime} 评论文章 ${item.uniquekey}`} extra={<a href={`/details/${item.uniquekey}`}>查看</a>}>
+			<Card key={index} title={`于 ${item.datetime} 评论文章 ${item.uniquekey}`} extra={<Link to={`/details/${item.uniquekey}`}>查看</Link>}>
 				<p>{item.Comments}</p>
 			</Card>
 		))
@@ -127,7 +128,7 @@ export default class MobileUserCenter extends Component {
 							dataSource={reactcollectlist}
 							renderItem={(item,index)=>(
 								<ListItem key={`collect${index}`}>
-									<a href={`/details/${item.uniquekey}`}>{item.Title}</a>
+									<Link to={`/details/${item.uniquekey}`}>{item.Title}</Link>
 								</ListItem>
 							)}
 						/>

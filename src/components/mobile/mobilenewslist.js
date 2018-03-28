@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 //const ListItem = List.Item;
@@ -40,13 +40,13 @@ export default class MobileList extends Component {
 			?
 			newslist.map((item,index) => (
 				<li key={index}>
-					<a href={`/details/${item.uniquekey}`} className="listWrap clearfix">
+					<Link to={`/details/${item.uniquekey}`} className="listWrap clearfix">
 						<div className="listImg"><img src={item.thumbnail_pic_s} alt={item.title}/></div>
 						<div className="listContent">
 							<div><span>{item.title}</span></div>
 							<p><span>{item.realtype}</span>{item.date}</p>
 						</div>
-					</a>
+					</Link>
 				</li>
 			))
 			:
