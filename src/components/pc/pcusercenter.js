@@ -98,6 +98,7 @@ export default class PCUserCenter extends Component {
 		const pagination = {
 			current: currentcollectpage,
 			pageSize: collectpagesize,
+			size: this.context.pageSize,
 			total: collectlist.length,
 			onChange: ((pageNumber) => {
 		  	if(pageNumber !== currentcollectpage){

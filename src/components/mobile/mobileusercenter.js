@@ -77,10 +77,18 @@ export default class MobileUserCenter extends Component {
 	}
 	render(){
 		var { collectlist, commentlist, currentcollectpage, collectpagesize, previewVisible, previewImage, fileList } = this.state;
-		var reactcollectlist = collectlist.slice(collectpagesize*(currentcollectpage - 1), collectpagesize*currentcollectpage);
+		var collectlist2 = [];
+		for(var i=collectlist.length-1;i>=0;i--){
+			collectlist2.push(collectlist[i]);
+		}
+		var reactcollectlist = collectlist2.slice(collectpagesize*(currentcollectpage - 1), collectpagesize*currentcollectpage);
+		var commentlist2 = [];
+		for(var i=commentlist.length-1;i>=0;i--){
+			commentlist2.push(commentlist[i]);
+		}
 		var reactcommentlist = commentlist.length
 		?
-		commentlist.map((item,index) => (
+		commentlist2.map((item,index) => (
 			<Card key={index} title={`于 ${item.datetime} 评论文章 ${item.uniquekey}`} extra={<a href={`/details/${item.uniquekey}`}>查看</a>}>
 				<p>{item.Comments}</p>
 			</Card>
@@ -90,6 +98,7 @@ export default class MobileUserCenter extends Component {
 		const pagination = {
 			current: currentcollectpage,
 			pageSize: collectpagesize,
+			size: this.context.pageSize,
 			total: collectlist.length,
 			onChange: ((pageNumber) => {
 		  	if(pageNumber !== currentcollectpage){
@@ -152,9 +161,7 @@ export default class MobileUserCenter extends Component {
 MobileUserCenter.contextTypes = {
 	isLogined: PropTypes.bool,
 	userId: PropTypes.number,
+	pageSize: PropTypes.string,
 }
-
-
-
 
 
