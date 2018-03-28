@@ -78,12 +78,12 @@ export default class PCUserCenter extends Component {
 	render(){
 		var { collectlist, commentlist, currentcollectpage, collectpagesize, previewVisible, previewImage, fileList } = this.state;
 		var collectlist2 = [];
-		for(var i=collectlist.length-1;i>=0;i--){
+		for(let i=collectlist.length-1;i>=0;i--){
 			collectlist2.push(collectlist[i]);
 		}
 		var reactcollectlist = collectlist2.slice(collectpagesize*(currentcollectpage - 1), collectpagesize*currentcollectpage);
 		var commentlist2 = [];
-		for(var i=commentlist.length-1;i>=0;i--){
+		for(let i=commentlist.length-1;i>=0;i--){
 			commentlist2.push(commentlist[i]);
 		}
 		var reactcommentlist = commentlist2.length
