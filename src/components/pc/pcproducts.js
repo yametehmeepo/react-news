@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const PCProducts = (props) => (
 	<div className="pop_all_product open_pop_product">
